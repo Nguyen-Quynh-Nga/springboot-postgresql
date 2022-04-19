@@ -49,14 +49,20 @@ class DemoSpringBootPostgresqlApplicationTests {
     @Test
     public void updateProduct() {
         Product product = new Product(1, "hat", 1, 2.0);
+//        repository.save(product);
         Product newProduct = new Product();
-        product.setName("hattttt");
-        product.setQuantity(2);
-        product.setPrice(2.2);
-        given(repository.findById(product.getId())).willReturn(Optional.of(product));
+        newProduct.setId(1);
+        newProduct.setName("hattttt");
+        newProduct.setQuantity(2);
+        newProduct.setPrice(2.2);
+        //Given
+        given(repository.getById(product.getId())).willReturn(product);
+        //When
         service.updateProduct(product.getId(), newProduct);
-        verify(repository).save(newProduct);
-        verify(repository).findById(product.getId());
+        //Then
+        verify(repository).getById(product.getId());
+        verify(repository).saveAndFlush(product);
+
 
     }
 
@@ -69,8 +75,8 @@ class DemoSpringBootPostgresqlApplicationTests {
         when(repository.save(ArgumentMatchers.any(Product.class))).thenReturn(product);
         Product created = service.addProduct(product);
         assertThat(created.getName()).isSameAs(product.getName());
-        assertThat(created.getQuantity()).isSameAs(product.getQuantity());
-        assertThat(created.getPrice()).isSameAs(product.getPrice());
+        assertThat(created.getQuantity()).isEqualTo(product.getQuantity());
+        assertThat(created.getPrice()).isEqualTo(product.getPrice());
         verify(repository).save(product);
     }
 
