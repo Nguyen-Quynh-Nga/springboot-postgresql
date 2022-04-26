@@ -2,6 +2,7 @@ package com.example.demospringbootpostgresql.controller;
 
 
 import com.example.demospringbootpostgresql.models.Product;
+import com.example.demospringbootpostgresql.repositories.ProductRepository;
 import com.example.demospringbootpostgresql.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,8 +14,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/products")
 public class ProductController {
-//    @Autowired
-//    private ProductRepository productRepository;
+    @Autowired
+    private ProductRepository productRepository;
     @Autowired
     private ProductService service;
     @GetMapping
@@ -22,20 +23,20 @@ public class ProductController {
         return this.service.getAllProducts();
 
     }
-//    @GetMapping("/name/{name}")
-//    public ResponseEntity<List<Product>> getProductsByName(@PathVariable String name) {
-//        return new ResponseEntity<>(productRepository.findByName(name), HttpStatus.OK);
-//    }
+    @GetMapping("/name/{name}")
+    public ResponseEntity<List<Product>> getProductsByName(@PathVariable String name) {
+        return new ResponseEntity<>(productRepository.findByName(name), HttpStatus.OK);
+    }
 
     @GetMapping("/id/{id}")
     public Product getById(@PathVariable int id) {
         return this.service.getProductById(id);
     }
 
-//    @GetMapping("/price/{price}")
-//    public List<Product> getByPrice(@PathVariable double price) {
-//        return this.productRepository.findProductByPrice(price);
-//    }
+    @GetMapping("/price/{price}")
+    public List<Product> getByPrice(@PathVariable double price) {
+        return this.productRepository.findProductByPrice(price);
+    }
 
     @PostMapping
     public Product create(@RequestBody Product product) {
