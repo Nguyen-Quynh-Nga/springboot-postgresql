@@ -23,20 +23,20 @@ public class ProductController {
         return this.service.getAllProducts();
 
     }
-    @GetMapping("/name/{name}")
-    public ResponseEntity<List<Product>> getProductsByName(@PathVariable String name) {
-        return new ResponseEntity<>(productRepository.findByName(name), HttpStatus.OK);
-    }
+//    @GetMapping("/name/{name}")
+//    public ResponseEntity<List<Product>> getProductsByName(@PathVariable String name) {
+//        return new ResponseEntity<>(productRepository.findByName(name), HttpStatus.OK);
+//    }
 
     @GetMapping("/id/{id}")
     public Product getById(@PathVariable int id) {
         return this.service.getProductById(id);
     }
 
-    @GetMapping("/price/{price}")
-    public List<Product> getByPrice(@PathVariable double price) {
-        return this.productRepository.findProductByPrice(price);
-    }
+//    @GetMapping("/price/{price}")
+//    public List<Product> getByPrice(@PathVariable double price) {
+//        return this.productRepository.findProductByPrice(price);
+//    }
 
     @PostMapping
     public Product create(@RequestBody Product product) {
