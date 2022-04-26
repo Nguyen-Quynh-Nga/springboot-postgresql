@@ -40,4 +40,8 @@ public class ProductService {
         BeanUtils.copyProperties(product, existingProduct, "id");
         return this.repository.saveAndFlush(existingProduct);
     }
+    public Product getProductByPrice(double price) {
+        return (Product) this.repository.findProductByPrice(price);
+    }
+
 }

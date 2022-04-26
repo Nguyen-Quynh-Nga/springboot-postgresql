@@ -33,10 +33,10 @@ public class ProductController {
         return this.service.getProductById(id);
     }
 
-//    @GetMapping("/price/{price}")
-//    public List<Product> getByPrice(@PathVariable double price) {
-//        return this.productRepository.findProductByPrice(price);
-//    }
+    @GetMapping("/price/{price}")
+    public Product getByPrice(@PathVariable double price) {
+        return this.service.getProductByPrice(price);
+    }
 
     @PostMapping
     public Product create(@RequestBody Product product) {
